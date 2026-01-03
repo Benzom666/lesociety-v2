@@ -3,13 +3,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { apiRequest, dateCategory } from "utils/Utilities";
 // Socket.io removed
-// import io from "socket.io-client";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { format } from "timeago.js";
 import { IoIosSend, IoMdSearch } from "react-icons/io";
 import Image from "next/image";
 import withAuth from "@/core/withAuth";
-import { socket } from "../user/user-list"; // Will be null
+// TODO: Implement Supabase Realtime for chat messages
 import NoImage from "assets/img/no-image.png";
 import { IoIosArrowBack } from "react-icons/io";
 import MessageSend from "assets/Send.svg";

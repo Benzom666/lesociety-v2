@@ -30,12 +30,10 @@ import ProfileImageSlider from "./ProfileImageSlider";
 import ImageSlider from "./ImageSlider";
 import MessageModal from "@/core/MessageModal";
 // Socket.io removed
-// import io from "socket.io-client";
 import { AUTHENTICATE_UPDATE } from "../actionConstants";
 
 // Socket.io removed - no socket usage
 /** @type {any} */
-export const socket = null;
 
 function UserProfile({ preview, editHandle }) {
   const { width } = useWindowSize();

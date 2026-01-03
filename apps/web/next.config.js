@@ -19,7 +19,6 @@ const nextConfig = {
   },
 
   env: {
-    modules: ["auth", "event"],
     MAPBOX_TOKEN:
       process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "pk.eyJ1Ijoic2VjcmV0dGltZSIsImEiOiJja3poN3dhY2IwZXk3Mm5vMmlqdnpqMDNxIn0.RELof70VoVmL4Y4-C8HHmw",
   },

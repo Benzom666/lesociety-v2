@@ -35,11 +35,9 @@ import { AUTHENTICATE_UPDATE } from "@/modules/auth/actionConstants";
 import { toast } from "react-toastify";
 import VerifiedProfileMobileHeader from "@/core/VerifiedProfileMobileHeader";
 // Socket.io removed
-// import io from "socket.io-client";
 import { logout } from "@/modules/auth/authActions";
 
 /** @type {any} */
-export const socket = null; // Socket.io removed
 const VerifiedProfilePage = (props) => {
   const { invalid, previousPage, pristine, reset, submitting, touched } = props;
   const [isActive, setActive] = useState(false);

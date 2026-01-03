@@ -19,8 +19,6 @@ import CustomInput from "Views/CustomInput";
 import { IoIosSend } from "react-icons/io";
 import { useRef } from "react";
 import SkeletonArticle from "@/modules/skeleton/SkeletonArticle";
-// Socket.io removed - using Supabase Realtime
-// import io from "socket.io-client";
 import { removeCookie } from "utils/cookie";
 import MessageSend from "assets/message_send.png";
 import MessageSend2 from "assets/message_send2.png";
@@ -40,8 +38,11 @@ import Loader from "@/modules/Loader/Loader";
 import StarIcon from "../../assets/Star.png";
 import StarBlankIcon from "../../assets/Star_blank.png";
 
-/** @type {any} */
-export const socket = null; // Socket.io removed
+// TODO: Implement Supabase Realtime for:
+// - Real-time message notifications
+// - Chat request notifications  
+// - Push notifications
+// See: apps/web/services/supabase-chat.js
 
 function UserList(props) {
   const { width } = useWindowSize();
@@ -86,26 +87,7 @@ function UserList(props) {
 
   console.log("isIOS", isIOS, isAndroid);
 
-  useEffect(() => {
-    socket.auth = { user: user };
-    socket.connect();
-    socket.on("connect", () => {
-      console.log("connected");
-    });
-    socket.on("disconnect", (reason) => {
-      console.log("socket disconnected reason", reason);
-    });
-  }, [!socket.connected]);
-
-  socket.on(
-    "connect_error",
-    () => {
-      console.log("connect_error");
-      socket.auth = { user: user };
-      socket.connect();
-    },
-    [!socket.connected]
-  );
+  // TODO: Replace with Supabase Realtime subscriptions for real-time updates
 
   useEffect(() => {
     if (router?.query?.city) {
@@ -130,36 +112,7 @@ function UserList(props) {
     getConversations();
   }, []);
 
-  useEffect(() => {
-    socket.on(`request-${user?._id}`, (message) => {
-      console.log("reqested message header", message);
-      getConversations();
-    });
-  }, [socket.connected]);
-
-  useEffect(() => {
-    socket.on(`recieve-${user?._id}`, (message) => {
-      console.log("recieve message header", message);
-      getConversations();
-    });
-  }, [socket.connected]);
-
-  useEffect(() => {
-    console.log("Notif socket connected", socket.connected);
-    socket.on("connect", () => {
-      console.log(socket.id);
-    });
-    setTimeout(() => {
-      socket.on(`push-notification-${user.email}`, (message) => {
-        console.log("notif received", message);
-        const unc = message?.notifications?.filter(
-          (item) => item.status === 0 && item.type !== "notification"
-        ).length;
-        localStorage.setItem("unreadNotifCount", JSON.stringify(unc));
-        setCount(unc);
-      });
-    }, 500);
-  }, [socket.connected]);
+  // TODO: Replace socket listeners with Supabase Realtime subscriptions
 
   useEffect(() => {
     if (classPopup === "show") {

@@ -11,13 +11,9 @@ import { useRouter } from "next/router";
 import { apiRequest } from "utils/Utilities";
 import SkeletonElement from "../SkeletonElement";
 import Shimmer from "../Shimmer";
-// Socket.io removed
-// import io from "socket.io-client";
 import { useState } from "react";
 
-// Socket.io removed - no socket usage
-/** @type {any} */
-export const socket = null;
+// TODO: Implement Supabase Realtime for notifications
 
 function SkeletonUserProfile({ preview, editHandle, theme }) {
   const { width } = useWindowSize();
@@ -30,41 +26,7 @@ function SkeletonUserProfile({ preview, editHandle, theme }) {
   // for notification
   const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    socket.auth = { user: user };
-    socket.connect();
-    socket.on("connect", () => {
-      console.log("connected");
-    });
-    socket.on("disconnect", (reason) => {
-      console.log("socket disconnected reason", reason);
-    });
-  }, [!socket.connected]);
-
-  socket.on(
-    "connect_error",
-    () => {
-      console.log("connect_error");
-      socket.auth = { user: user };
-      socket.connect();
-    },
-    [!socket.connected]
-  );
-
-  useEffect(() => {
-    console.log("Notif socket connected", socket.connected);
-    // socket.on("connect", () => {
-    //   console.log(socket.id);
-    // });
-    socket.on(`push-notification-${user.email}`, (message) => {
-      console.log("notif received", message);
-      const unc = message?.notifications?.filter(
-        (item) => item.status === 0 && item.type !== "notification"
-      ).length;
-      localStorage.setItem("unreadNotifCount", JSON.stringify(unc));
-      setCount(unc);
-    });
-  }, [socket.connected]);
+  // TODO: Replace socket listeners with Supabase Realtime
 
   const fetchDates = async (userName) => {
     try {

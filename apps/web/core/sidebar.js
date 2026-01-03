@@ -16,7 +16,6 @@ import { BiTime } from "react-icons/bi";
 import { reset } from "redux-form";
 import { apiRequest } from "utils/Utilities";
 // Socket.io removed
-// import io from "socket.io-client";
 import { socket } from "pages/user/user-list"; // Will be null
 
 export default function SideBar({ isActive, count }) {

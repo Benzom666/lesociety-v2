@@ -18,7 +18,6 @@ import classNames from "classnames";
 import useWindowSize from "utils/useWindowSize";
 import { apiRequest } from "utils/Utilities";
 // Socket.io removed
-// import io from "socket.io-client";
 import { socket } from "pages/user/user-list"; // Will be null
 
 function sideBarPopup({ isOpen, toggle, count }) {

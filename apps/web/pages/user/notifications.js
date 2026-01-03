@@ -10,11 +10,9 @@ import axios from "axios";
 import Image from "next/image";
 import HeaderLoggedIn from "@/core/loggedInHeader";
 // Socket.io removed
-// import io from "socket.io-client";
 import { logout } from "@/modules/auth/authActions";
 
 /** @type {any} */
-export const socket = null; // Socket.io removed
 
 const Notifications = () => {
   const [notifData, setNotifData] = useState([]);

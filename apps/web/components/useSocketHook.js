@@ -1,13 +1,11 @@
-import { useEffect, useRef } from "react";
-// Socket.io removed - this hook is deprecated
-// import io from "socket.io-client";
+import { useRef } from "react";
+
+// TODO: Replace with Supabase Realtime channel subscriptions
+// See: apps/web/services/supabase-chat.js
 
 const useSocket = () => {
   const socketRef = useRef();
-
-  // Socket.io removed - return null
   socketRef.current = null;
-
   return socketRef.current;
 };
 

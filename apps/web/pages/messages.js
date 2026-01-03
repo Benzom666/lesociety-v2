@@ -19,7 +19,6 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { FiChevronRight } from "react-icons/fi";
 import withAuth from "../core/withAuth";
 // Socket.io removed
-// import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { apiRequest, dateCategory } from "utils/Utilities";
 import { format } from "timeago.js";
@@ -27,7 +26,7 @@ import { format } from "timeago.js";
 import UserCardListForMessage from "./../core/UserCardListForMessage";
 import { useRouter } from "next/router";
 import useWindowSize from "utils/useWindowSize";
-import { socket } from "./user/user-list"; // Will be null
+// TODO: Implement Supabase Realtime for chat messages
 import NoConversationShowView from "@/modules/messages/NoConversationShowView";
 import MessageMobileHeader from "./../core/MessageMobileHeader";
 import MessageSend from "assets/Send.svg";
@@ -35,12 +34,6 @@ import MessageSend2 from "assets/message_send2.png";
 import { logout } from "@/modules/auth/authActions";
 import moment from "moment";
 import StarIcon from "../assets/request star.png";
-
-// const socket = io.connect(socketURL);
-
-// const socket = io(socketURL, {
-//   autoConnect: true,
-// });
 
 const Messages = (props) => {
   const {
