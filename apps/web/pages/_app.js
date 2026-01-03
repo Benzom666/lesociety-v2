@@ -14,17 +14,18 @@ import {
 
 import Router from "next/router";
 import Loader from "@/modules/Loader/Loader";
-import io from "socket.io-client";
+// Socket.io disabled - using Supabase Realtime for chat
+// import io from "socket.io-client";
 
 import "styles/style.scss";
 import { removeCookie } from "utils/cookie";
 import LanscapeDecline from "@/core/LanscapeDecline";
-import { socketURL } from "utils/Utilities";
+// import { socketURL } from "utils/Utilities";
 
 /** @type {any} */
-export const socket = io(socketURL, {
-  autoConnect: true,
-});
+// Socket.io disabled to eliminate network spam and improve boot time
+// Chat now uses Supabase Realtime (see apps/web/services/supabase-chat.js)
+export const socket = null;
 
 class MyApp extends App {
   constructor(props) {
