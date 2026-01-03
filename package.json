@@ -1,0 +1,25 @@
+{
+  "name": "lesociety-v2",
+  "version": "2.0.0",
+  "private": true,
+  "description": "LeSociety v2 - Modern Next.js + Supabase Monorepo",
+  "packageManager": "pnpm@10.26.2",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean && rm -rf node_modules .turbo",
+    "seed": "pnpm --filter @lesociety/seed seed",
+    "db:migrate": "echo 'Run migrations in Supabase SQL Editor or via CLI: supabase db push'"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}
