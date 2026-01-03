@@ -392,7 +392,7 @@ NEXT_PUBLIC_SUPABASE_URL=https://xzmrbcsjxaawmiewkmhw.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 # Service Role Key (SERVER-ONLY, for admin API routes in future)
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+SUPABASE_SERVICE_ROLE_KEY=<REDACTED_SERVICE_ROLE_KEY>
 
 # Database URL (for migrations/scripts only)
 DATABASE_URL=postgresql://postgres:[password]@db.xzmrbcsjxaawmiewkmhw.supabase.co:5432/postgres

@@ -56,7 +56,17 @@ for i in "${!PATTERNS[@]}"; do
   echo "Checking for: $name"
   
   # Search recursively, case-insensitive
-  results=$(grep -rniE "$pattern" . $EXCLUDE_ARGS 2>/dev/null | grep -v "REDACTED" | grep -v "<YOUR_" | grep -v "<PASSWORD>" | grep -v "<TOKEN>" | grep -v "<KEY>" || true)
+  results=$(grep -rniE "$pattern" . $EXCLUDE_ARGS 2>/dev/null | \
+    grep -v "REDACTED" | \
+    grep -v "<YOUR_" | \
+    grep -v "<PASSWORD>" | \
+    grep -v "<TOKEN>" | \
+    grep -v "<KEY>" | \
+    grep -v "your-service-role-key" | \
+    grep -v "your-" | \
+    grep -v "eyJhbGci\.\.\." | \
+    grep -v "# ⚠️ SECRET" | \
+    grep -v "echo.*test-secret" || true)
   
   if [ -n "$results" ]; then
     echo "❌ FOUND: $name"

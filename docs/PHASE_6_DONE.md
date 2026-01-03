@@ -75,7 +75,7 @@ chmod +x .git/hooks/pre-commit
 - postgresql://.*:.*@ (connection strings with passwords)
 - AKIA[0-9A-Z]{16} (AWS keys)
 - -----BEGIN.*PRIVATE KEY-----
-- SUPABASE_SERVICE_ROLE_KEY=eyJ
+- SUPABASE_SERVICE_ROLE_KEY (with actual value)
 ```
 
 ### ✅ Service Role Key Server-Only
