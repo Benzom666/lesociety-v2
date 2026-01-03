@@ -15,10 +15,10 @@ import Shimmer from "../Shimmer";
 // import io from "socket.io-client";
 import { useState } from "react";
 
+// Socket.io removed - no socket usage
 /** @type {any} */
-export const socket = io(socketURL, {
-  autoConnect: true,
-});
+export const socket = null;
+
 function SkeletonUserProfile({ preview, editHandle, theme }) {
   const { width } = useWindowSize();
   const [userDetail, setUserDetail] = React.useState("");
