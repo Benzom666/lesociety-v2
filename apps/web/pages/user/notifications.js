@@ -9,10 +9,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Image from "next/image";
 import HeaderLoggedIn from "@/core/loggedInHeader";
-// Socket.io removed
+import { getSupabaseClient } from "../../services/supabase-client-singleton";
 import { logout } from "@/modules/auth/authActions";
-
-/** @type {any} */
 
 const Notifications = () => {
   const [notifData, setNotifData] = useState([]);
@@ -22,44 +20,40 @@ const Notifications = () => {
   const [conversations, setConversations] = useState([]);
   const dispatch = useDispatch();
 
+  // Supabase Realtime: Subscribe to notifications
   useEffect(() => {
-    socket.auth = { user: user };
-    socket.connect();
-    socket.on("connect", () => {
-      console.log("connected");
-    });
-    socket.on("disconnect", (reason) => {
-      console.log("socket disconnected reason", reason);
-    });
-  }, [!socket.connected]);
+    if (typeof window === 'undefined' || !user?._id) return;
 
-  socket.on(
-    "connect_error",
-    () => {
-      console.log("connect_error");
-      socket.auth = { user: user };
-      socket.connect();
-    },
-    [!socket.connected]
-  );
+    const supabase = getSupabaseClient();
+    if (!supabase) return;
+
+    // Subscribe to notifications table changes
+    const channel = supabase
+      .channel('notifications-updates')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'notifications',
+          filter: `user_id=eq.${user._id}`,
+        },
+        (payload) => {
+          console.log('New notification:', payload);
+          // Refresh notifications list
+          getNotificationList();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [user?._id]);
 
   useEffect(() => {
     getConversations();
   }, []);
-
-  useEffect(() => {
-    socket.on(`request-${user?._id}`, (message) => {
-      console.log("reqested message header", message);
-      getConversations();
-    });
-  }, [socket.connected]);
-
-  useEffect(() => {
-    socket.on(`recieve-${user?._id}`, (message) => {
-      console.log("recieve message header", message);
-      getConversations();
-    });
-  }, [socket.connected]);
 
   const unReadedConversationLength = conversations?.filter(
     (c) =>
@@ -93,21 +87,6 @@ const Notifications = () => {
       return err;
     }
   };
-
-  useEffect(() => {
-    console.log("Notif socket connected", socket.connected);
-    // socket.on("connect", () => {
-    //   console.log(socket.id);
-    // });
-    socket.on(`push-notification-${user.email}`, (message) => {
-      console.log("notif received", message);
-      const unc = message?.notifications?.filter(
-        (item) => item.status === 0 && item.type !== "notification"
-      ).length;
-      localStorage.setItem("unreadNotifCount", JSON.stringify(unc));
-      setCount(unc);
-    });
-  }, [socket.connected]);
 
   const user = useSelector((state) => state.authReducer.user);
   const { width } = useWindowSize();

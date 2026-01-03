@@ -26,7 +26,7 @@ import { format } from "timeago.js";
 import UserCardListForMessage from "./../core/UserCardListForMessage";
 import { useRouter } from "next/router";
 import useWindowSize from "utils/useWindowSize";
-// TODO: Implement Supabase Realtime for chat messages
+import { getSupabaseClient } from "../services/supabase-client-singleton";
 import NoConversationShowView from "@/modules/messages/NoConversationShowView";
 import MessageMobileHeader from "./../core/MessageMobileHeader";
 import MessageSend from "assets/Send.svg";
@@ -68,62 +68,52 @@ const Messages = (props) => {
   // for notification
   const [count, setCount] = useState(0);
 
+  // Supabase Realtime: Subscribe to chatroom changes
   useEffect(() => {
-    socket.auth = { user: user };
-    socket.connect();
-    console.log("socket", socket.auth);
-    socket.on("connect", () => {
-      console.log("connected", socket.connected);
-    });
-    socket.on("disconnect", (reason) => {
-      console.log("socket disconnected reason", reason);
-    });
-    console.log("I am called");
-  }, []);
+    if (typeof window === 'undefined' || !user?._id) return;
 
-  useEffect(() => {
-    socket.on("connect_error", () => {
-      console.log("connect_error");
-      socket.auth = { user: user };
-      socket.connect();
-    });
-  }, [!socket.connected]);
+    const supabase = getSupabaseClient();
+    if (!supabase) return;
 
-  // useEffect(() => {
-  // setTimeout(() => {
-  //   socket.close();
-  // }, 10000);
-  // }, []);
+    // Subscribe to new messages in any chatroom where user is a participant
+    const channel = supabase
+      .channel('chatroom-updates')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'messages',
+        },
+        (payload) => {
+          console.log('Message change detected:', payload);
+          // Refresh conversations when new message arrives
+          getConversations();
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'chatrooms',
+        },
+        (payload) => {
+          console.log('Chatroom change detected:', payload);
+          // Refresh conversations when chatroom status changes
+          getConversations();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [user?._id]);
 
   useEffect(() => {
     getConversations();
   }, [user]);
-
-  useEffect(
-    () => {
-      console.log("socket request Accept Event", socket.connected);
-      socket.on(`requestAccept-${user?._id}`, (message) => {
-        console.log("requestAccept message", message);
-        getConversations();
-      });
-    },
-    [
-      // socket.connected
-    ]
-  );
-
-  useEffect(
-    () => {
-      console.log("socket request message will", socket.connected);
-      socket.on(`request-${user?._id}`, (message) => {
-        console.log("reqested message", message);
-        getConversations();
-      });
-    },
-    [
-      // socket.connected
-    ]
-  );
 
   const customFormat = (date, normalDate) => {
     const now = moment(); // Current date and time
