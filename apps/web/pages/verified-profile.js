@@ -17,7 +17,6 @@ import {
   apiRequestChatHistory,
   dateCategory,
   imageUploader,
-  socketURL,
 } from "utils/Utilities";
 import { format } from "timeago.js";
 import qs from "qs";
@@ -35,13 +34,12 @@ import VerifiedUploadIcon from "@/modules/verifiedProfile/VerifiedUploadIcon";
 import { AUTHENTICATE_UPDATE } from "@/modules/auth/actionConstants";
 import { toast } from "react-toastify";
 import VerifiedProfileMobileHeader from "@/core/VerifiedProfileMobileHeader";
-import io from "socket.io-client";
+// Socket.io removed
+// import io from "socket.io-client";
 import { logout } from "@/modules/auth/authActions";
 
 /** @type {any} */
-export const socket = io(socketURL, {
-  autoConnect: true,
-});
+export const socket = null; // Socket.io removed
 const VerifiedProfilePage = (props) => {
   const { invalid, previousPage, pristine, reset, submitting, touched } = props;
   const [isActive, setActive] = useState(false);

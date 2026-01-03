@@ -5,7 +5,7 @@ import Footer from "core/footer";
 import router from "next/router";
 import LocationPopup from "@/core/locationPopup";
 import withAuth from "../../core/withAuth";
-import { apiRequest, countriesCode, socketURL } from "utils/Utilities";
+import { apiRequest, countriesCode } from "utils/Utilities";
 import {
   fetchCities,
   fetchLiveLocation,
@@ -19,7 +19,8 @@ import CustomInput from "Views/CustomInput";
 import { IoIosSend } from "react-icons/io";
 import { useRef } from "react";
 import SkeletonArticle from "@/modules/skeleton/SkeletonArticle";
-import io from "socket.io-client";
+// Socket.io removed - using Supabase Realtime
+// import io from "socket.io-client";
 import { removeCookie } from "utils/cookie";
 import MessageSend from "assets/message_send.png";
 import MessageSend2 from "assets/message_send2.png";
@@ -40,14 +41,7 @@ import StarIcon from "../../assets/Star.png";
 import StarBlankIcon from "../../assets/Star_blank.png";
 
 /** @type {any} */
-export const socket = io(socketURL, {
-  reconnection: true,
-  autoConnect: true,
-  transports: ["websocket", "polling", "flashsocket"],
-  reconnectionDelay: 1000,
-  reconnectionDelayMax: 5000,
-  reconnectionAttempts: Infinity,
-});
+export const socket = null; // Socket.io removed
 
 function UserList(props) {
   const { width } = useWindowSize();

@@ -30,7 +30,8 @@ import close1 from "../../../assets/close1.png";
 import ProfileImageSlider from "./ProfileImageSlider";
 import ImageSlider from "./ImageSlider";
 import MessageModal from "@/core/MessageModal";
-import io from "socket.io-client";
+// Socket.io removed
+// import io from "socket.io-client";
 import { AUTHENTICATE_UPDATE } from "../actionConstants";
 
 /** @type {any} */

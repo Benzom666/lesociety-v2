@@ -1,21 +1,12 @@
 import { useEffect, useRef } from "react";
-import io from "socket.io-client";
-import { socketURL } from "utils/Utilities";
+// Socket.io removed - this hook is deprecated
+// import io from "socket.io-client";
 
 const useSocket = () => {
   const socketRef = useRef();
 
-  const url = socketURL;
-
-  useEffect(() => {
-    socketRef.current = io(url, {
-      autoConnect: true,
-    });
-
-    return () => {
-      socketRef.current.disconnect();
-    };
-  }, [url]);
+  // Socket.io removed - return null
+  socketRef.current = null;
 
   return socketRef.current;
 };

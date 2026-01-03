@@ -2,19 +2,19 @@ import { useRouter } from "next/router";
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { apiRequest, dateCategory } from "utils/Utilities";
-import io from "socket.io-client";
+// Socket.io removed
+// import io from "socket.io-client";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { format } from "timeago.js";
 import { IoIosSend, IoMdSearch } from "react-icons/io";
 import Image from "next/image";
 import withAuth from "@/core/withAuth";
-import { socket } from "../user/user-list";
+import { socket } from "../user/user-list"; // Will be null
 import NoImage from "assets/img/no-image.png";
 import { IoIosArrowBack } from "react-icons/io";
 import MessageSend from "assets/Send.svg";
 import MessageSend2 from "assets/message_send2.png";
 import { logout } from "@/modules/auth/authActions";
-// const socket = io.connect(socketURL);
 
 function ChatMessages({ ...props }) {
   const [currentChat, setCurrentChat] = React.useState(null);

@@ -18,7 +18,8 @@ import Link from "next/link";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { FiChevronRight } from "react-icons/fi";
 import withAuth from "../core/withAuth";
-import io from "socket.io-client";
+// Socket.io removed
+// import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { apiRequest, dateCategory } from "utils/Utilities";
 import { format } from "timeago.js";
@@ -26,8 +27,7 @@ import { format } from "timeago.js";
 import UserCardListForMessage from "./../core/UserCardListForMessage";
 import { useRouter } from "next/router";
 import useWindowSize from "utils/useWindowSize";
-// import { socket } from "./_app";
-import { socket } from "./user/user-list";
+import { socket } from "./user/user-list"; // Will be null
 import NoConversationShowView from "@/modules/messages/NoConversationShowView";
 import MessageMobileHeader from "./../core/MessageMobileHeader";
 import MessageSend from "assets/Send.svg";

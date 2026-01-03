@@ -11,22 +11,10 @@ import supabaseStorage from "../services/supabase-storage";
 import supabaseDates from "../services/supabase-dates";
 import supabaseChat from "../services/supabase-chat";
 
-// Legacy URLs (keep for Socket.IO if still needed in Phase 4)
-export const socketURL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+// API URL
 export const apiURL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-// export const socketURL = "https://staging-api.nsmatka.com/";
-// export const apiURL = "https://staging-api.nsmatka.com";
-
-/*export const socketURL =
-  process.env.NODE_ENV === "production"
-    ? process.env.NEXT_PUBLIC_PROD_SOCKET_URL
-    : process.env.NEXT_PUBLIC_PROD_SOCKET_URL;
-export const apiURL =
-  process.env.NODE_ENV === "production"
-    ? process.env.NEXT_PUBLIC_PROD_API_URL
-    : process.env.NEXT_PUBLIC_PROD_API_URL;
-    */
+// Socket.io REMOVED - using Supabase Realtime for all real-time features
 
 // export const apiRequest = async (args = {}) => {
 //   let token = "";

@@ -3,19 +3,18 @@ import Header from "core/header";
 import Footer from "core/footer";
 import useWindowSize from "../../utils/useWindowSize";
 import withAuth from "@/core/withAuth";
-import { apiRequest, apiURL, socketURL } from "utils/Utilities";
+import { apiRequest, apiURL } from "utils/Utilities";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Image from "next/image";
 import HeaderLoggedIn from "@/core/loggedInHeader";
-import io from "socket.io-client";
+// Socket.io removed
+// import io from "socket.io-client";
 import { logout } from "@/modules/auth/authActions";
 
 /** @type {any} */
-export const socket = io(socketURL, {
-  autoConnect: true,
-});
+export const socket = null; // Socket.io removed
 
 const Notifications = () => {
   const [notifData, setNotifData] = useState([]);

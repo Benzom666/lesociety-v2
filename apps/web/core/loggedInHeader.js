@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import { apiRequest } from "utils/Utilities";
-import io from "socket.io-client";
+// Socket.io removed
+// import io from "socket.io-client";
 import SideBarPopup from "./sideBarPopup";
 import Image from "next/image";
 import close1 from "../assets/close1.png";
