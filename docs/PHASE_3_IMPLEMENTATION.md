@@ -220,7 +220,7 @@ cd /run/media/benzom/1A2C58B02C5888A1/PROJECTS/lesociety-v2/apps/web
 Ensure `.env.local` exists with:
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://xzmrbcsjxaawmiewkmhw.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<REDACTED_ANON_KEY>
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_MAPBOX_TOKEN=(your mapbox token if needed)
 ```

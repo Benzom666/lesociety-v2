@@ -41,7 +41,7 @@ module.exports = {
 Create `apps/web/.env.local`:
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=https://xzmrbcsjxaawmiewkmhw.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6bXJiY3NqeGFhd21pZXdrbWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc0MTY2NzYsImV4cCI6MjA4Mjk5MjY3Nn0.5F9WDWDX4505pNj47RtcALchFW0tw8LMLZcmHQvH3SU
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<REDACTED_ANON_KEY>
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
